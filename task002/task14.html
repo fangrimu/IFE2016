@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  var showData=[];
+  for(var data of aqiData){
+    if(data[1]>60){
+      showData.push(data);
+    }
+  }
+
+//首先按照空气质量指数进行降序排列，如果指数相同，则按照拼音降序排列
+function compare(val1,val2){
+  if(val1[1]<val2[1]){
+    return 1;
+  }else if(val1[1]>val2[1]){
+    return -1;
+  }else if(val1[1]==val2[1]){
+    return val2[0].localeCompare(val1[0]);
+  }
+  
+}
+showData.sort(compare);
+
+//遍历数组，生成页面元素
+/*for (var i=0,len=showData.length;i<len;i++) {
+    var li=document.createElement('li');
+    li.innerHTML='第'+(i+1)+'名:'+showData[i][0]+',   '+showData[i][1];
+    document.getElementById('aqi-list').appendChild(li);    
+  }*/
+//优化内容：尽量避免循环内appendChild…重排会引起性能下降，对DOM的操作要越少越好，可考虑将ul中内容 保存到临时字符串 最后一次性添加。
+//优化for循环
+var content='';
+for (var i=0,len=showData.length;i<len;i++) {
+    content+='<li>第'+(i+1)+'名:'+showData[i][0]+',   '+showData[i][1]+'</li>';
+}
+document.getElementById('aqi-list').innerHTML=content;
+})();
+
+</script>
+</body>
+</html>

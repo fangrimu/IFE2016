@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+<fieldset id="form-gra-time">
+    <legend>请选择日期粒度：</legend>
+    <label>日<input name="gra-time" value="day" type="radio" checked="checked"></label>
+    <label>周<input name="gra-time" value="week" type="radio"></label>
+    <label>月<input name="gra-time" value="month" type="radio"></label>
+  </fieldset>
+</body>
+<script type="text/javascript">
+function graTimeChange(){
+	console.log('我要打印value了');
+	alert(this.value);
+}
+function initGraTimeForm() {
+  var radios=document.getElementsByTagName('input');
+  for(var i=0;i<radios.length;i++){
+      radios[i].onclick=graTimeChange;
+  }
+}
+
+initGraTimeForm();
+
+</script>
+</html>

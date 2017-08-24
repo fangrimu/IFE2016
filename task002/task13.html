@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+//第一次书写代码如下
+/*(function() {
+  /*  
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  */
+/*var aqiInput=document.getElementById('aqi-input');
+var btn=document.getElementById('button');
+function getValue(){
+   if(!document.getElementById){
+    return false;
+  }
+  var userInput=aqiInput.value;
+  if((userInput.length>0) && (!isNaN(parseInt(userInput)))){
+
+    return parseInt(userInput);
+    
+  }else{
+    return false;
+  }
+}
+function showValue(){
+  var value=getValue();
+  if(typeof value ==='number'){
+    
+    document.getElementById('aqi-display').innerHTML=value;
+  }else{
+    alert('请输入有效数值');
+    document.getElementById('aqi-display').innerHTML='尚未录入'
+  }
+}
+btn.addEventListener('click',showValue,false);
+
+function handleKey(e){
+  if(e.keyCode===13){
+    btn.click();
+  }
+}
+aqiInput.addEventListener('keyup',handleKey,false);
+})();*/
+
+//第二次优化
+(function() {
+  /*  
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  */
+
+  function $(id){
+    return document.getElementById(id);
+  }
+
+  function handler(){
+    var userInput=parseInt($('aqi-input').value);
+    if(!isNaN(userInput) && 0<userInput<1000){
+      $('aqi-display').innerHTML=userInput;
+    }else{
+      alert('请输入0-1000之间的有效数值！');
+    }
+  }
+
+  $('button').onclick=handler;
+  $('aqi-input').onkeyup=function(e){
+    if (e.keyCode===13) {
+      $('button').click();
+    }
+  }
+})();
+
+
+
+</script>
+</body>
+</html>
